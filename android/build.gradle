@@ -2,14 +2,13 @@ group 'com.github.chinloyal.pusher_client'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.7.10' //UPDATED
+    ext.kotlin_version = '1.9.20' // Latest stable Kotlin Gradle plugin :contentReference[oaicite:0]{index=0}
     repositories {
         google()
-        mavenCentral() // jcenter is deprecated
+        mavenCentral()  // jcenter() is deprecated; switch to Maven Central :contentReference[oaicite:1]{index=1}
     }
-
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.0' // Match your app-level Gradle
+        classpath "com.android.tools.build:gradle:8.7.3"           // AGP ≥7.1.0 & latest stable 8.7.3 :contentReference[oaicite:2]{index=2}
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -17,7 +16,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        mavenCentral()
+        mavenCentral()  // Ensures all dependencies (including Pusher client) are resolved :contentReference[oaicite:3]{index=3}
     }
 }
 
@@ -25,11 +24,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace "com.pusher.client" //  REQUIRED to avoid namespace errors
-    compileSdkVersion 33 //  Updated for modern Flutter compatibility
+    namespace "com.pusher.client"        // Required by AGP 7.0+ :contentReference[oaicite:4]{index=4}
+    compileSdkVersion 34                // Android 14 API level 34 :contentReference[oaicite:5]{index=5}
 
     defaultConfig {
-        minSdkVersion 21 // 16 is very outdated; Flutter often recommends at least 21
+        minSdkVersion 21                // Google Play requires ≥20; 21 is a safe minimum :contentReference[oaicite:6]{index=6}
     }
 
     compileOptions {
@@ -51,6 +50,6 @@ android {
 }
 
 dependencies {
-    implementation "com.pusher:pusher-java-client:2.2.5"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.pusher:pusher-java-client:2.4.4"            // Latest Pusher Java client :contentReference[oaicite:7]{index=7}
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version" // Use JDK8 stdlib :contentReference[oaicite:8]{index=8}
 }
